@@ -85,7 +85,6 @@ img {
                     <thead>
                         <tr>
                             <th>Batch ID</th>
-                            <th>QR-Code</th>
                             <th>ADMIN</th>
                             <th>Farm Inspector</th>
                             <th>Harvester</th>
@@ -591,8 +590,10 @@ var batchFormInstance, userFormInstance, updateFormInstance;
                     var user_array = response.data;
                     console.log(user_array);
                     $(".preloader").hide();
-                    swal('Success', "User data updated into system successfully",'success');
-                location.reload();
+                  swal('Success',"User Data Updated Successfully",'success')
+             .then((value) => {
+               location.reload();
+           });
                      
                
                 
@@ -677,14 +678,11 @@ var batchFormInstance, userFormInstance, updateFormInstance;
 
             $(".preloader").hide();
             $("form#userForm").trigger('reset');
-            swal('Success', "User created into system successfully.",'success');
-            
-               
+            swal('Success',"User Created Into System Successfully",'success')
+             .then((value) => {
                location.reload();
-                 
-
-            
-            } 
+           });
+ } 
              else {
 
                 $(".preloader").hide();
@@ -755,11 +753,17 @@ function createCultivation() {
 
         if (response.error == undefined) {
 
+        
             $(".preloader").hide();
             $("form#batchForm").trigger('reset');
-            swal('Success', "Batch Created Successfully", 'success');
             
-       // $("#batchcontainer").load(location.href + "#batchcontainer");
+    swal('Success',"Batch Created Successfully",'success')
+             .then((value) => {
+               location.reload();
+           });     
+
+
+   
         }
          else {
 
@@ -790,7 +794,7 @@ function createCultivation() {
        
 
         var batchid = batch.BatchId;
-        var qrcode = "qr";
+       
         var action = "action";
        
         
@@ -798,7 +802,7 @@ function createCultivation() {
             
             tr = `<tr>
                     <td>`+batchid+`</td>
-                    <td>`+qrcode+`</td>                   
+                               
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
@@ -811,7 +815,7 @@ function createCultivation() {
          else if (batch.Status == "FARMINSPECTOR") {
             tr = `<tr>
                    <td>`+batchid+`</td>
-                    <td>`+qrcode+`</td>  
+                    
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-warning font-weight-100">Processing</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
@@ -826,7 +830,7 @@ function createCultivation() {
         else if (batch.Status == "HARVESTOR") {
             tr = `<tr>
                    <td>`+batchid+`</td>
-                    <td>`+qrcode+`</td>  
+                    
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-warning font-weight-100">Processing</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
@@ -838,7 +842,7 @@ function createCultivation() {
         } else if (batch.Status == "EXPORTOR") {
             tr = `<tr>
                     <td>`+batchid+`</td>
-                    <td>`+qrcode+`</td>  
+                    
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-success font-weight-100">Completed</span> </td>
                     <td><span class="label label-warning font-weight-100">Processing</span> </td>
@@ -850,7 +854,7 @@ function createCultivation() {
         } else if (batch.Status == "IMPORTOR") {
             tr = `<tr>
                    <td>`+batchid+`</td>
-                    <td>`+qrcode+`</td>  
+                    
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-success font-weight-100">Completed</span> </td>
                     <td><span class="label label-success font-weight-100">Completed</span> </td>
@@ -862,7 +866,7 @@ function createCultivation() {
         } else if (batch.Status == "PROCESSOR") {
             tr = `<tr>
                     <td>`+batchid+`</td>
-                    <td>`+qrcode+`</td>  
+                  
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-success font-weight-100">Completed</span> </td>
                     <td><span class="label label-success font-weight-100">Completed</span> </td>

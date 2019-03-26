@@ -15,6 +15,9 @@ img {
     max-width: 100%;
     max-height: 100%;
 }
+
+
+
 </style>
 
             <div class="container-fluid">
@@ -65,7 +68,7 @@ img {
                 </div>
                 <!--row -->
                 <!-- /.row -->
-                
+                </div>
 
                                <!-- row -->
                 <div class="row">
@@ -73,23 +76,22 @@ img {
                         <div class="white-box">
                             <h3 class="box-title">Batches Overview</h3> 
                             <div class="table-responsive">
-                                <table class="table product-overview" id="userCultivationTable">
+                                <table class="table product-overview" id="userCultivationTable" >
                                     <thead>
                                         <tr>
                                             <th>Batch ID</th>
+                                            <th>ADMIN</th>
                                             <th>Farm Inspector</th>
                                             <th>Harvester</th>
                                             <th>Exporter</th>
                                             <th>Importer</th>
                                             <th>Processor</th>
-                                            <th>View</th>
+                                          
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         <tr>
-                                             <td colspan="7" align="center">No Data Available</td>
-                                         </tr>                                         
+                                                                                  
                                     </tbody>
                                 </table>
 
@@ -124,10 +126,10 @@ img {
                                                     <label class="control-label" for="role">Role </label>
                                                     <select class="form-control" id="role" disabled="true" name="role">
                                                         <option value="">Select Role</option>
-                                                        <option value="FARM_INSPECTION">Farm Inspection</option>
-                                                        <option value="HARVESTER">Harvester</option>
-                                                        <option value="EXPORTER">Exporter</option>
-                                                        <option value="IMPORTER">Importer</option>
+                                                        <option value="FARMINSPECTOR">Farm Inspection</option>
+                                                        <option value="HARVESTOR">Harvester</option>
+                                                        <option value="EXPORTOR">Exporter</option>
+                                                        <option value="IMPORTOR">Importer</option>
                                                         <option value="PROCESSOR">Processor</option>
                                                     </select>    
                                                 </div>
@@ -140,7 +142,7 @@ img {
                                                 </div>
                                     <div class="form-group" id = updateimagePreview></div>
                                             </fieldset>
-                                        
+                                  
                                     </div>
                                     <div class="modal-footer">
                                         <i style="display: none;" class="fa fa-spinner fa-spin"></i>
@@ -341,118 +343,265 @@ img {
             </div>
             <!-- /.container-fluid -->
 
-        <script type="text/javascript">
-            var switchery;
-            $(document).ready(function(){
+<script type="text/javascript">
+var switchery;
+  var Id = {}
+ 
 
-    var Id = {}
-    Id.loginid = <?php $arr = $this->session->userdata('user_data'); echo $arr['id'];?>;
-                
-console.log(Id.loginid)
-
-               // initSwitch();
-                initDateTimePicker();
-            
-
-
-axios({
-method: 'get',
-url: "http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser/" + Id.loginid,
-responseType: 'json',
-timeout: 60000,
-})
+    $(document).ready(function(){
+        
+        console.log(Id.loginid)
+        axios({
+             method: 'get',
+             url: 'http://localhost:3000/api/com.coffeesupplychain.system.BatchAsset',
+             responseType: 'json',
+             timeout: 60000,
+          })
            .then(function(response) {
             if (response.data.length <= 0) {
-            console.log("null responce")
-            
+           // console.log("null responce")
+            console.log(response.data.length)
             } 
-            else {
-var user_array = response.data;
-var role =user_array.Role;
-console.log(user_array)
-document.getElementById('userContact').innerHTML = +user_array.ContactNo;
-document.getElementById('userRole').innerHTML = user_array.Role;
-document.getElementById('userName').innerHTML = user_array.FirstName+" "+user_array.LastName;
-document.getElementById('currentUserAddress').innerHTML = user_array.Email;
+            else 
+            {
+                buildCultivationTable(response);
+            }
+         });
 
- var img = 'https://ipfs.io/ipfs/' +user_array.ProfileImage;
+    function buildCultivationTable(batchdata){
+       var table ="";
+       for (var tmpDataIndex in batchdata.data)
+    {   
+        var elem = batchdata.data[tmpDataIndex];
+        $(elem).each(function(index, batch) {
+       
+        var batchid = batch.BatchId;
+        
+        var action = "action";
+       if (batch.Status == "ADMIN") {
+            
+            tr = `<tr>
+                    <td>`+batchid+`</td>
+                 <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><input type ="button" class= "btn btn-info m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light"value ="action"></button></td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    </tr>`;
+        } 
+         else if (batch.Status == "FARMINSPECTOR") {
+            tr = `<tr>
+                   <td>`+batchid+`</td>
+                   
+                    <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    </tr>`;
+          }
+
+
+        else if (batch.Status == "HARVESTOR") {
+            tr = `<tr>
+                   <td>`+batchid+`</td>
+                   
+                    <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    </tr>`;
+        } else if (batch.Status == "EXPORTOR") {
+            tr = `<tr>
+                    <td>`+batchid+`</td>
+                   
+                    <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    </tr>`;
+        } else if (batch.Status == "IMPORTOR") {
+            tr = `<tr>
+                   <td>`+batchid+`</td>
+                   
+                    <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    </tr>`;
+        } else if (batch.Status == "PROCESSOR") {
+            tr = `<tr>
+                    <td>`+batchid+`</td>
+                   
+                    <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                   </tr>`;
+        } 
+        table+=tr;
+    
+    });
+}
+
+
+        $('#userCultivationTable').find('tbody').append(table);
+    
+}
+       
+        Id.loginid = <?php $arr = $this->session->userdata('user_data'); echo $arr['id'];?>;
+                
+//console.log(Id.loginid)
+        axios({
+        method: 'get',
+        url: "http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser/" + Id.loginid,
+        responseType: 'json',
+        timeout: 60000,
+        })
+        .then(function(response) {
+            if (response.data.length <= 0) {
+            console.log("null responce")
+            } 
+            else 
+            {
+                console.log(Id.loginid)
+            var user_array = response.data;
+            
+            Id.user = user_array;
+            var role =user_array.Role;
+            console.log(user_array)
+            document.getElementById('userContact').innerHTML = +user_array.ContactNo;
+            document.getElementById('userRole').innerHTML = user_array.Role;
+            document.getElementById('userName').innerHTML = user_array.FirstName+" "+user_array.LastName;
+            document.getElementById('currentUserAddress').innerHTML = user_array.Email;
+            var img = 'https://ipfs.io/ipfs/' +user_array.ProfileImage;
       
-$("#userImage").attr("src",img);
-
-$("#editUser").attr("data-userId",Id.loginid);
-$("#editUser").attr("data-FirstName",user_array.FirstName);
-$("#editUser").attr("data-LastName",user_array.LastName);
-$("#editUser").attr("data-ContactNo",user_array.ContactNo);
-$("#editUser").attr("data-imgHash",user_array.ProfileImage);
-
-
-                 
-                 }
+            $("#userImage").attr("src",img);
+            $("#editUser").attr("data-userId",Id.loginid);
+            $("#editUser").attr("data-FirstName",user_array.FirstName);
+            $("#editUser").attr("data-LastName",user_array.LastName);
+            $("#editUser").attr("data-ContactNo",user_array.ContactNo);
+            $("#editUser").attr("data-imgHash",user_array.ProfileImage);
+            $("#editUser").attr("data-userrole",user_array.Role)
+            }
          
          });
 
  
 
 
-$('#editUser').click(function(){
-    var userFirstName = $("#editUser").attr("data-FirstName");
-    var userLastName = $("#editUser").attr("data-LastName");
-    var userContactNo = $("#editUser").attr("data-ContactNo");
-    var userProfileImage = $("#editUser").attr("data-imgHash");
-    
-$("#firstname").val(userFirstName);
-$("#Lastname").val(userLastName);
-$("#contactNumber").val(userContactNo);
-var img = 'https://ipfs.io/ipfs/' +userProfileImage
-       $('#updateimagePreview').html('<img src="'+ img +'">');
-               
+        $('#editUser').click(function(){
+            var userFirstName = $("#editUser").attr("data-FirstName");
+            var userLastName = $("#editUser").attr("data-LastName");
+            var userContactNo = $("#editUser").attr("data-ContactNo");
+            var userProfileImage = $("#editUser").attr("data-imgHash");
+            var userRole = $("#editUser").attr("data-userrole")
+            $("#firstname").val(userFirstName);
+            $("#Lastname").val(userLastName);
+            $("#contactNumber").val(userContactNo);
+            $("#userProfileHash").val(userProfileImage);
+            $("#role").val(userRole);
+            console.log(userProfileImage);
+            var img = 'https://ipfs.io/ipfs/' +userProfileImage
+            $('#updateimagePreview').html('<img src="'+ img +'">');
+            //console.log(userFirstName);
+            $("#userFormModel").modal();
 
-    
+           
 
+    });
 
-
-    //console.log(userFirstName);
-   
-  $("#userFormModel").modal();
 });
-
-
-
- });
-///function initSwitch(){
-                /*For User Form Pop Up*/
-   //             switchery = new Switchery($("#isActive")[0], $("#isActive").data());    
-    //        }
-
-            function initDateTimePicker(){
-                $('.datepicker-master').datetimepicker({
-                    format: 'dd-mm-yyyy hh:ii:ss',
-                    weekStart: 1,
-                    todayBtn:  1,
-                    autoclose: 1,
-                    todayHighlight: 1,
-                    startView: 2,
-                    forceParse: 0,
-                    showMeridian: 1,
-                    minuteStep: 1
-                });
-            }
         
 
 
 
-function updateprofile(){
-     var updateFormData = $("#updateUserForm").serialize();
-     console.log(updateFormData);
-}
+function updateprofile() {
+        $(".preloader").show();
+console.log("global"+Id.user.Role)
+        if ($("#updateUserForm").parsley().isValid()) {
 
+        var updateFormData = $("#updateUserForm").serialize();
 
-ipfs = window.IpfsApi('ipfs.infura.io', '5001', {
-        protocol: 'https'
-    })
+        
+        
+        var blockchainData = {
 
-    function handleFileUpload(event) {
-        const file = event.target.files[0];
+            "$class": "com.coffeesupplychain.participant.SystemUser",
+            "FirstName": $("#firstname").val(),
+            "LastName":  $("#Lastname").val(),
+            "ContactNo":  $("#contactNumber").val(),
+            "ProfileImage": $("#userProfileHash").val(),
+            "Role": Id.user.Role,
+            "Status": Id.user.Status,
+            "Email": Id.user.Email,
+            "Address": Id.user.Address
+            }
+
+var logid = <?php $arr = $this->session->userdata('user_data'); echo $arr['id'];?>;
+//console.log(Id.loginid);
+        axios({
+                method: 'put',
+                url: "http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser/" +logid,
+                data: blockchainData,
+                responseType: 'json',
+                timeout: 60000,
+            })
+            .then(function(response) {
+
+                if (response.data.length <= 0) {
+                    console.log("null responce")
+                } else {
+                    var user_array = response.data;
+                    console.log(user_array);
+                    $(".preloader").hide();
+                  swal('Success',"User Data Updated Successfully",'success')
+             .then((value) => {
+               location.reload();
+           });
+         }
+      });
+    }
+    
+    else{
+        $(".preloader").hide();
+    swal('Error', "something went wrong", 'error');
+    console.log("not valid")
+        }
+    
+    }
+
+      function initDateTimePicker(){
+             $('.datepicker-master').datetimepicker({
+             format: 'dd-mm-yyyy hh:ii:ss',
+             weekStart: 1,
+             todayBtn:  1,
+             autoclose: 1,
+             todayHighlight: 1,
+             startView: 2,
+             forceParse: 0,
+             showMeridian: 1,
+             minuteStep: 1
+                });
+        }
+        
+        
+            ipfs = window.IpfsApi('ipfs.infura.io', '5001', {
+            protocol: 'https'
+        })
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
 
         let reader = new window.FileReader();
         reader.onloadend = function() {
@@ -465,17 +614,16 @@ ipfs = window.IpfsApi('ipfs.infura.io', '5001', {
         reader.readAsArrayBuffer(file)
     }
 
-     function saveToIpfs(reader) {
-        let ipfsId;
-
-        const Buffer = window.IpfsApi().Buffer;
-        const buffer = Buffer.from(reader.result);
+        function saveToIpfs(reader) {
+            let ipfsId;
+            const Buffer = window.IpfsApi().Buffer;
+            const buffer = Buffer.from(reader.result);
 
         /*Upload Buffer to IPFS*/
         ipfs.files.add(buffer, (err, result) => {
             if (err) {
                 console.error(err)
-                return
+                
             }
 
             var imageHash = result[0].hash;
@@ -493,14 +641,10 @@ ipfs = window.IpfsApi('ipfs.infura.io', '5001', {
         
 
 
-var img = 'https://ipfs.io/ipfs/' +imageHash
-       $('#updateimagePreview').html('<img src="'+ img +'">');
-
-        });
+            var img = 'https://ipfs.io/ipfs/' +imageHash
+            $('#updateimagePreview').html('<img src="'+ img +'">');
+          });
     }
-
-
-
 
         </script>
         
