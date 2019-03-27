@@ -421,8 +421,8 @@ img {
 
     var Id = {}
     Id.loginid = <?php $arr = $this->session->userdata('user_data'); echo $arr['id'];?>;
-
-var batchFormInstance, userFormInstance, updateFormInstance;
+    var userId = <?php $arr = $this->session->userdata('user_data'); echo $arr['id'];?>;
+    var batchFormInstance, userFormInstance, updateFormInstance;
     $(document).ready(function() {
 
         axios({
@@ -438,7 +438,7 @@ var batchFormInstance, userFormInstance, updateFormInstance;
             } 
             else {
                 Id.batchCount = response.data.length;
-                document.getElementById('totalBatch').innerHTML = Id.batchCount;
+                $('#totalBatch').html(Id.batchCount);
                buildCultivationTable(response);
                  }
          });
@@ -463,7 +463,7 @@ var batchFormInstance, userFormInstance, updateFormInstance;
                     var table = '';
                     Id.userCount = user_array.length;
                    
-                    document.getElementById('totalUsers').innerHTML = Id.userCount;
+                   $('#totalUsers').html(Id.userCount);
 
                     $(user_array).each(function(index, user) {
                        
@@ -577,7 +577,7 @@ var batchFormInstance, userFormInstance, updateFormInstance;
 
         axios({
                 method: 'put',
-                url: "http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser/" + Id.userid,
+                url: "http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser/" +userId ,
                 data: blockchainData,
                 responseType: 'json',
                 timeout: 60000,
@@ -588,11 +588,11 @@ var batchFormInstance, userFormInstance, updateFormInstance;
                     console.log("null responce")
                 } else {
                     var user_array = response.data;
-                    console.log(user_array);
+                   
                     $(".preloader").hide();
                   swal('Success',"User Data Updated Successfully",'success')
-             .then((value) => {
-               location.reload();
+                  .then((value) => {
+                     location.reload();
            });
                      
                
@@ -600,7 +600,7 @@ var batchFormInstance, userFormInstance, updateFormInstance;
                 
                 }
             });
-             }
+        }
     else{
         $(".preloader").hide();
     swal('Error', "something went wrong", 'error');
@@ -728,8 +728,8 @@ function createCultivation() {
 
      function addCultivationBatch(){
 
-          var AdminId = Id.loginid;
-          var cultivator = "resource:com.coffeesupplychain.participant.SystemUser#"+AdminId;
+          
+          var cultivator = "resource:com.coffeesupplychain.participant.SystemUser#"+userId;
 
 
      var blockchainData = {
@@ -757,13 +757,14 @@ function createCultivation() {
             $(".preloader").hide();
             $("form#batchForm").trigger('reset');
             
-    swal('Success',"Batch Created Successfully",'success')
-             .then((value) => {
-               location.reload();
-           });     
+        
 
 
-   
+    swal('Success',"batch created successfully",'success')
+            .then((value) => {
+            location.reload();
+        });
+
         }
          else {
 
@@ -794,15 +795,14 @@ function createCultivation() {
        
 
         var batchid = batch.BatchId;
-       
-        var action = "action";
+        
        
         
        if (batch.Status == "ADMIN") {
             
             tr = `<tr>
                     <td>`+batchid+`</td>
-                               
+                                    
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
@@ -830,7 +830,7 @@ function createCultivation() {
         else if (batch.Status == "HARVESTOR") {
             tr = `<tr>
                    <td>`+batchid+`</td>
-                    
+                   
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-warning font-weight-100">Processing</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
@@ -866,7 +866,7 @@ function createCultivation() {
         } else if (batch.Status == "PROCESSOR") {
             tr = `<tr>
                     <td>`+batchid+`</td>
-                  
+                    
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-success font-weight-100">Completed</span> </td>
                     <td><span class="label label-success font-weight-100">Completed</span> </td>
@@ -933,8 +933,8 @@ ipfs = window.IpfsApi('ipfs.infura.io', '5001', {
         
 
 
-var img = 'https://ipfs.io/ipfs/' +imageHash
-       $('#updateimagePreview').html('<img src="'+ img +'">');
+            var img = 'https://ipfs.io/ipfs/' +imageHash
+            $('#updateimagePreview').html('<img src="'+ img +'">');
 
         });
     }
