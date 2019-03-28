@@ -112,7 +112,7 @@ img {
                                                     <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Name" data-parsley-required="true">
                                                 </div> 
 
-                                               <div class="form-group">
+                                               <ypediv class="form-group">
                                                     <label class="control-label" for="fullname">Last Name <i class="red">*</i></label>
                                                     <input type="text" class="form-control" id="Lastname" name="Lastname" placeholder="Name" data-parsley-required="true">
                                                 </div>    
@@ -154,194 +154,359 @@ img {
                         </div>
 
                             
+                          <div id="farmInspectionModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 170px;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h2 class="modal-title" id="farmInspectionModelTitle">Farm Inspection</h2>
+                                    </div>
 
-                            <!-- Farm Inspection Form -->
-                            <form id="farmInspectionForm" class="mfp-hide white-popup-block">
-                                <h1>Farm Inspection</h1><br>
+                                    <div class="modal-body">
+                                        <!-- Farm Inspection Form -->
+                            <form id="farmInspectionForm" >
+                                <fieldset style="border:0;">
+                                    <!-- <div class="form-group">
+                                        <label class="control-label" for="InspectorId">Inspector ID Number</label>
+                                        <input type="text" class="form-control" id="InspectorId" name="inspectorId" placeholder="inspector id number" data-parsley-required="true">
+                                    </div>   -->                            
+                                <div class="form-group">
+                                  
+                                  <input type="hidden" class="form-control" id="batchid" name="batchid" placeholder="batch Id" data-parsley-required="true">
+                                </div>
+
+                                <div class="form-group">
+                               
+                                        <input type="hidden" class="form-control" id="previoushandler" name="previoushandler" placeholder="Previous Handler" data-parsley-required="true">
+                                </div>
+
+                                <div class="form-group">
+                                
+                                        <input type="hidden" class="form-control" id="currenthandler" name="currenthandler" placeholder="Current Handler" data-parsley-required="true">
+                                </div>
+                                    
+                                <div class="form-group">
+                                <label class="control-label" for="typeofseed">Type of Seed</label>
+                                        <input type="text" class="form-control" id="typeofseed" name="typeofseed" placeholder="Type of Seed" data-parsley-required="true">
+                                </div>
+
+                                <div class="form-group">
+                                <label class="control-label" for="coffefamily">Coffe Family</label>
+                                        <input type="text" class="form-control" id="coffefamily" name="coffefamily" placeholder="Coffee Family" data-parsley-required="true">
+                                </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="fertilizer">Fertilizer Used</label>
+                                        <input type="text" class="form-control" id="fertilizerUsed" name="fertilizer" placeholder="fertilizer used" data-parsley-required="true">
+                                    </div>
+                                    </fieldset>
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-default waves-effect" >Reset</button>
+                                        <button type="button" id="updateFarmInspection" class="btn btn-primary">Submit</button>
+                                    </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                            <!-- Harvesting Form -->
+                            <div id="harvesterModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 170px;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h2 class="modal-title" id="userModelTitle">harvester</h2>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <!-- harvestor Form -->
+                            <form id="harvestorForm" >
                                 <fieldset style="border:0;">
                                     <!-- <div class="form-group">
                                         <label class="control-label" for="InspectorId">Inspector ID Number</label>
                                         <input type="text" class="form-control" id="InspectorId" name="inspectorId" placeholder="inspector id number" data-parsley-required="true">
                                     </div>   -->                            
                                     <div class="form-group">
-                                        <label class="control-label" for="typeOfSeed">Type of Seed</label>
-                                        <input type="text" class="form-control" id="typeOfSeed" name="typeOfSeed" placeholder="type of seed" data-parsley-required="true">
+                                        
+                                        <input type="hidden" class="form-control" id="BatchId" name="BatchId" placeholder="Batch Id" data-parsley-required="true">
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <label class="control-label" for="coffeeFamily">Coffee Family</label>
-                                        <input type="text" class="form-control" id="coffeeFamily" name="coffeeFamily" placeholder="coffee family" data-parsley-required="true">
+                                      
+                                        <input type="hidden" class="form-control" id="previoushandler" name="previoushandler" placeholder="Previous Handler" data-parsley-required="true">
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <label class="control-label" for="fertilizer">Fertilizer Used</label>
-                                        <input type="text" class="form-control" id="fertilizerUsed" name="fertilizer" placeholder="fertilizer used" data-parsley-required="true">
+                                       
+                                        <input type="text" class="form-control" id="currenthandler" name="currenthandler" placeholder="Current Handler" data-parsley-required="true">
                                     </div>
-                                     <div class="form-group float-right">
+
+
+                                    <div class="form-group">
+                                       <label class="control-label" for="coffeevariety">Coffee Variety</label>
+                                        <input type="text" class="form-control" id="coffeevariety" name="coffeevariety" placeholder="coffeevariety" data-parsley-required="true">
+                                    </div> 
+
+                                    <div class="form-group">
+                                       <label class="control-label" for="temprature">Temprature</label>
+                                        <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature" data-parsley-required="true">
+                                    </div>
+
+                                    <div class="form-group">
+                                       <label class="control-label" for="humidity">Humidity</label>
+                                    <input type="text" class="form-control" id="humidity" name="Humidity" placeholder="Humidity" data-parsley-required="true">
+                                    </div>
+                            
+                             </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
                                         <button type="reset" class="btn btn-default waves-effect" >Reset</button>
-                                        <button type="button" id="updateFarmInspection" class="btn btn-primary">Submit</button>
+                                        <button type="button" id="updateharvestor" class="btn btn-primary">Submit</button>
                                     </div>
-                                </fieldset>
-                            </form>
-
-                             <!-- Harvesting Form -->
-                            <form id="harvesterForm" class="mfp-hide white-popup-block ">
-                                <h1>Harvesting</h1><br>
-                                <fieldset style="border:0;">
-                                                            
-                                    <div class="form-group">
-                                        <label class="control-label" for="cropVariety">Coffee Variety</label>
-                                        <input type="text" class="form-control" id="cropVariety" name="cropVariety" placeholder="coffee variety" data-parsley-required="true">
+                                        </form>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label" for="temperatureUsed">Temperature (in Fahrenheit)</label>
-                                        <input type="text" class="form-control" id="temperatureUsed" name="temperatureUsed" placeholder="temperature" data-parsley-required="true">
-                                    </div>
-                                     <div class="form-group">
-                                        <label class="control-label" for="humidity">Humidity</label>
-                                        <input type="text" class="form-control" id="humidity" name="humidity" placeholder="humidity" data-parsley-required="true">
-                                    </div>                                
-                                    <div class="form-group float-right">
-                                        <button type="reset" class="btn btn-default waves-effect">Reset</button>
-                                        <button type="button" id="updateHarvest"class="btn btn-primary">Submit</button>
-                                    </div>
-                                </fieldset>
-                            </form>
-
-                            <!-- Exporter Form -->
-                            <form id="exporterForm" class="mfp-hide white-popup-block">
-                                <h1>Exporting</h1><br>
-                                <fieldset style="border:0;">
-
-                                    <div class="form-group">
-                                        <label class="control-label" for="quantity">Quantity (in Kg)</label>
-                                        <input type="number" min="1" class="form-control" id="quantity" name="quantity" placeholder="Quantity" data-parsley-required="true">
-                                    </div> 
-
-                                    <div class="form-group">
-                                        <label class="control-label" for="destinationAddress">Destination Address</label>
-                                        <input type="text" class="form-control" id="destinationAddress" name="destinationAddress" placeholder="Destination Address" data-parsley-required="true">
-                                    </div> 
-
-
-                                    <div class="form-group">
-                                        <label class="control-label" for="shipName">Ship Name</label>
-                                        <input type="text" class="form-control" id="shipName" name="shipName" placeholder="Ship Name" data-parsley-required="true">
-                                    </div> 
-
-                                    <div class="form-group">
-                                        <label class="control-label" for="shipNo">Ship No</label>
-                                        <input type="text" class="form-control" id="shipNo" name="shipNo" placeholder="Ship No" data-parsley-required="true">
-                                    </div> 
-
-                                    <div class="form-group">
-                                        <label class="control-label" for="estimateDateTime">Estimate Datetime</label>
-                                        <input type="text" class="form-control datepicker-master" id="estimateDateTime" name="estimateDateTime" placeholder="Estimate Datetime" data-parsley-required="true">
-                                    </div>
-
-                                    
-
-                                     <div class="form-group">
-                                        <label class="control-label" for="exporterId">Exporter ID</label>
-                                        <input type="number" class="form-control" id="exporterId" name="exporterId" placeholder="Exporter ID" data-parsley-required="true">
-                                    </div>
-
-
-                                     <div class="form-group float-right">
-                                        <button type="reset" class="btn btn-default waves-effect">Reset</button>
-                                        <button type="button" id="updateExport" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </fieldset>
-                            </form>
-
-                            <!-- Importer Form -->
-                            <form id="importerForm" class="mfp-hide white-popup-block">
-                                <h1>Importing</h1><br>
-                                <fieldset style="border:0;">
-
-                                    <div class="form-group">
-                                        <label class="control-label" for="quantity">Quantity</label>
-                                        <input type="number" min="1" class="form-control" id="quantity" name="quantity" placeholder="Quantity" data-parsley-required="true">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label" for="shipName">Ship Name</label>
-                                        <input type="text" class="form-control" id="shipName" name="shipName" placeholder="Ship Name" data-parsley-required="true">
-                                    </div> 
-
-                                    <div class="form-group">
-                                        <label class="control-label" for="shipNo">Ship No</label>
-                                        <input type="text" class="form-control" id="shipNo" name="shipNo" placeholder="Ship No" data-parsley-required="true">
-                                    </div> 
-
-                                    <div class="form-group">
-                                        <label class="control-label" for="transportInfo">Transport Info</label>
-                                        <input type="text" class="form-control" id="transportInfo" name="transportInfo" placeholder="Transport Info" data-parsley-required="true">
-                                    </div> 
-                                    <div class="form-group">
-                                        <label class="control-label" for="warehouseName">Warehouse Name</label>
-                                        <input type="text" class="form-control" id="warehouseName" name="warehouseName" placeholder="Warehouse Name" data-parsley-required="true">
-                                    </div> 
-                                    <div class="form-group">
-                                        <label class="control-label" for="warehouseAddress">Warehouse Address</label>
-                                        <input type="text" class="form-control" id="warehouseAddress" name="warehouseAddress" placeholder="Warehouse Address" data-parsley-required="true" >
-                                    </div>                              
-                                    <div class="form-group">
-                                        <label class="control-label" for="importerId">Importer Id</label>
-                                        <input type="number" min="1" class="form-control" id="importerId" name="importerId" placeholder="Importer Id" data-parsley-required="true" >
-                                    </div>                              
-                                    
-                                     <div class="form-group float-right">
-                                        <button type="reset" class="btn btn-default waves-effect">Reset</button>
-                                        <button type="button" id="updateImport"class="btn btn-primary">Submit</button>
-                                    </div>
-                                </fieldset>
-                            </form>
-
-                            <!-- Processor Form -->
-                            <form id="processingForm" class="mfp-hide white-popup-block">
-                                <h1>Processing</h1><br>
-                                <fieldset style="border:0;">
-                                    <div class="form-group">
-                                        <label class="control-label" for="quantity">Quantity (in Kg)</label>
-                                        <input type="number" min="1" class="form-control" id="quantity" name="quantity" placeholder="Quantity" data-parsley-required="true">
-                                    </div> 
-                                    <div class="form-group">
-                                        <label class="control-label" for="processingTemperature">Temperature (in Fahrenheit)</label>
-                                        <input type="text" class="form-control" id="processingTemperature" name="temperature" placeholder="Temperature" data-parsley-required="true">
-                                    </div>                              
-                                    <div class="form-group">
-                                        <label class="control-label" for="rostingDuration">Time for Roasting (in Seconds)</label>
-                                        <input type="number" min="1" class="form-control" id="rostingDuration" name="rostingDuration" placeholder="Time for roasting" data-parsley-required="true" >
-                                    </div>
-                               
-                                    <div class="form-group">
-                                        <label class="control-label" for="internalBatchNo">Internal Batch no</label>
-                                        <input type="text" class="form-control" id="internalBatchNo" name="internalBatchNo" placeholder="Internal Batch no" data-parsley-required="true">
-                                    </div>
-                           
-                                    <div class="form-group">
-                                        <label class="control-label" for="packageDateTime">Packaging Date & Time</label>
-                                        <input type="text" class="form-control datepicker-master" id="packageDateTime" name="packageDateTime" placeholder="Packaging Date" data-parsley-required="true">
-                                    </div> 
-                                    <div class="form-group">
-                                        <label class="control-label" for="processorName">Processor Name</label>
-                                        <input type="text" class="form-control" id="processorName" name="processorName" placeholder="Processor Name" data-parsley-required="true">
-                                    </div>                              
-                                    <div class="form-group">
-                                        <label class="control-label" for="processorAddress">Processor Address</label>
-                                        <input type="text" class="form-control" id="processorAddress" name="processorAddress" placeholder="Processor Address" data-parsley-required="true">
-                                    </div>
-                                     <div class="form-group float-right">
-                                        <button type="reset" class="btn btn-default waves-effect">Reset</button>
-                                        <button type="button" id="updateProcessor"class="btn btn-primary">Submit</button>
-                                    </div>
-                                </fieldset>
-                            </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>                
-            </div>
-            <!-- /.container-fluid -->
+                        <!-- ExporterForm -->
+                            <div id="ExporterModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 170px;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h2 class="modal-title" id="userModelTitle">Exporter</h2>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <!-- harvestor Form -->
+                            <form id="ExporterForm" >
+                                <fieldset style="border:0;">
+                                    <!-- <div class="form-group">
+                                        <label class="control-label" for="InspectorId">Inspector ID Number</label>
+                                        <input type="text" class="form-control" id="InspectorId" name="inspectorId" placeholder="inspector id number" data-parsley-required="true">
+                                    </div>   -->                            
+                                    <div class="form-group">
+                                        
+                                    <input type="hidden" class="form-control" id="batchid" name="batchid" placeholder="Batch Id" data-parsley-required="true">
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        
+                                        <input type="hidden" class="form-control" id="previoushandler" name="previoushandler" placeholder="Previous Handler" data-parsley-required="true">
+                                    </div>
+                                    
+                                    
+                                    <div class="form-group">
+                                        
+                                        <input type="hidden" class="form-control" id="currenthandler" name="currenthandler" placeholder="Current Handler" data-parsley-required="true">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="exportquantity">Export Quantity</label>
+                                        <input type="text" class="form-control" id="exportquantity" name="exportquantity" placeholder="Export Quantity" data-parsley-required="true">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="destaddr">Destination Address</label>
+                                        <input type="text" class="form-control" id="destaddr" name="destaddr" placeholder="Destination Address" data-parsley-required="true">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="shipname">Ship Name</label>
+                                        <input type="text" class="form-control" id="shipname" name="shipname" placeholder="Ship Name" data-parsley-required="true">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="shipno">Ship No</label>
+                                        <input type="text" class="form-control" id="shipno" name="shipno" placeholder="Ship No" data-parsley-required="true">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="estimateddatetime">Estimated Date Time</label>
+                                    <input type="text" class="form-control" id="estimateddatetime" name="estimateddatetime" placeholder="Estimated Date Time" data-parsley-required="true">
+                                    </div>
+                                        
+                                        
+                                </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-default waves-effect" >Reset</button>
+                                        <button type="button" id="updateexportor" class="btn btn-primary">Submit</button>
+                                    </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   
+                        <!-- ImporterForm -->
+                            <div id="ImporterModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 170px;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h2 class="modal-title" id="userModelTitle">Importer</h2>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        
+                            <form id="ImporterForm" >
+                                <fieldset style="border:0;">
+                                    <!-- <div class="form-group">
+                                        <label class="control-label" for="InspectorId">Inspector ID Number</label>
+                                        <input type="text" class="form-control" id="InspectorId" name="inspectorId" placeholder="inspector id number" data-parsley-required="true">
+                                    </div>   -->                            
+                                    <div class="form-group">
+                                        
+                                        <input type="hidden" class="form-control" id="batchid" name="batchid" placeholder="Batch Id" data-parsley-required="true">
+                                    </div>
+                                    
+
+                                    <div class="form-group">
+                                        
+                                        <input type="hidden" class="form-control" id="previoushandler" name="previoushandler" placeholder="Previous Handler" data-parsley-required="true">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                       
+                                        <input type="hidden" class="form-control" id="currenthandler" name="CurrentHandler" placeholder="Current Handler" data-parsley-required="true">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label" for="importquantity">Import Quantity</label>
+                                        <input type="text" class="form-control" id="importquantity" name="importquantity" placeholder="Import Quantity" data-parsley-required="true">
+                                    </div>
+                                    
+
+                                     <div class="form-group">
+                                        <label class="control-label" for="shipname">Ship Name</label>
+                                        <input type="text" class="form-control" id="shipname" name="shipname" placeholder="Ship Name" data-parsley-required="true">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="shipname">Ship No</label>
+                                        <input type="text" class="form-control" id="shipno" name="shipno" placeholder="Ship No" data-parsley-required="true">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="shipname">Transporter Info</label>
+                                        <input type="text" class="form-control" id="transportinfo" name="transportinfo" placeholder="Transporter Info" data-parsley-required="true">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="warehousename">Warehouse Name</label>
+                                        <input type="text" class="form-control" id="transportinfo" name="warehousename" placeholder="Warehouse Name" data-parsley-required="true">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="warehouseaddr">Warehouse Address</label>
+                                        <input type="text" class="form-control" id="warehouseaddr" name="warehouseaddr" placeholder="Warehouse Address" data-parsley-required="true">
+                                    </div>
+                                        
+                                </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-default waves-effect" >Reset</button>
+                                        <button type="button" id="updateimportor" class="btn btn-primary">Submit</button>
+                                    </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Processor form--> 
+                        
+                        <div id="ProcessorModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 170px;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h2 class="modal-title" id="userModelTitle">Processor</h2>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <!-- harvestor Form -->
+                            <form id="ProcessorForm" >
+                                <fieldset style="border:0;">
+                                    <!-- <div class="form-group">
+                                        <label class="control-label" for="InspectorId">Inspector ID Number</label>
+                                        <input type="text" class="form-control" id="InspectorId" name="inspectorId" placeholder="inspector id number" data-parsley-required="true">
+                                    </div>   -->                            
+                                    <div class="form-group">
+                                       
+                                        <input type="hidden" class="form-control" id="batchid" name="batchid" placeholder="Batch Id" data-parsley-required="true">
+                                    </div>
+                                    
+
+                                    <div class="form-group">
+                                        
+                                        <input type="hidden" class="form-control" id="previoushandler" name="previoushandler" placeholder="Previous Handler" data-parsley-required="true">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        
+                                        <input type="hidden" class="form-control" id="currenthandler" name="CurrentHandler" placeholder="Current Handler" data-parsley-required="true">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label" for="processedquantity">Processed Quantity</label>
+                                        <input type="text" class="form-control" id="Processed Quantity" name="processedquantity" placeholder="Processed Quantity" data-parsley-required="true">
+                                    </div>
+                                    
+
+                                     <div class="form-group">
+                                        <label class="control-label" for="roastingtemp">Roasting Temprature</label>
+                                        <input type="text" class="form-control" id="roastingtemp" name="roastingtemp" placeholder="Roasting Temprature" data-parsley-required="true">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="timeforroasting">Roasting Time</label>
+                                        <input type="text" class="form-control" id="timeforroasting" name="timeforroasting" placeholder="Roasting Time" data-parsley-required="true">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="packagingdatetime">Packaging Date Time</label>
+                                        <input type="text" class="form-control" id="packagingdatetime" name="packagingdatetime" placeholder="Packaging Date Time" data-parsley-required="true">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="processorname">Processor Name</label>
+                                        <input type="text" class="form-control" id="processorname" name="processorname" placeholder="Processor Name" data-parsley-required="true">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="processoraddress">Processor Address</label>
+                                        <input type="text" class="form-control" id="processoraddress" name="processoraddress" placeholder="Processor Address" data-parsley-required="true">
+                                    </div>
+                                        
+                                </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-default waves-effect" >Reset</button>
+                                        <button type="button" id="updateprocessor" class="btn btn-primary">Submit</button>
+                                    </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- /.container-fluid -->
 
 <script type="text/javascript">
     var switchery;
@@ -501,6 +666,7 @@ img {
 
                 var batchid = batch.BatchId;
                 var tr = "";
+                //var previoushandler = batch.Cultivator;
 
 
 
@@ -509,13 +675,15 @@ img {
                     tr = `<tr>
                     <td>` + batchid + `</td>
                   `;
+                  var cultivator = batch.Cultivator;
+
 
                     if (userRole == "FARMINSPECTOR") {
                         tr += ` <td><span class="label label-success font-weight-100">Completed</span></td>
 
                         <td>
                           <span class="label label-inverse font-weight-100">
-                          <a class="popup-with-form" href="#farmInspectionForm" onclick="editActivity('` + batchid + `')">
+                          <a class="popup-with-form" href="#farmInspectionForm" onclick="editActivity('` + batchid + `','farmInspectionModel','`+cultivator+`')">
                             <span class="label label-inverse font-weight-100">Update</span>
                           </a>
                       </td>`;
@@ -535,6 +703,7 @@ img {
                 } else if (batch.Status == "FARMINSPECTOR") {
                     tr = `<tr>
                     <td>`+batchid+`</td>`;
+                    var inspecter = batch.FarmInspector;
 
                     if (userRole == "HARVESTOR") {
                         tr += ` <td><span class="label label-success font-weight-100">Completed</span></td>
@@ -542,7 +711,7 @@ img {
 
                 <td>
                     <span class="label label-inverse font-weight-100">
-                          <a class="popup-with-form" href="#farmInspectionForm" onclick="editActivity('` + batchid + `')">
+                          <a class="popup-with-form" href="#farmInspectionForm" onclick="editActivity('` + batchid + `','harvesterModel','`+inspecter+`')">
                             <span class="label label-inverse font-weight-100">Update</span>
                           </a>
                       </td>`;
@@ -563,17 +732,21 @@ img {
               
           </tr>`;
 
-                } else if (batch.Status == "HARVESTOR") {
+                } 
+                else if (batch.Status == "HARVESTOR") {
                     tr = `<tr>
                     <td>` + batchid + `</td>
                     <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-success font-weight-100">Completed</span></td>
-                    `;
+                    `; 
+
+                    var harvester = batch.Harvestor;
+
                     if (userRole == "EXPORTOR") {
                         tr += `<td><span class="label label-success font-weight-100">Completed</span></td>
                             <td>
                             <span class="label label-inverse font-weight-100">
-                              <a class="popup-with-form" href="#harvesterForm" onclick="editActivity('` + batchid + `')">
+                              <a class="popup-with-form" href="#harvesterForm" onclick="editActivity('` + batchid + `','ExporterModel','`+harvester+`')">
                                 <span class="label label-inverse font-weight-100">Update</span>
                               </a>
                           </td>`;
@@ -599,10 +772,12 @@ img {
                      <td><span class="label label-success font-weight-100">Completed</span> </td>
                   `;
 
+                    var exporter = batch.Exportor;
+
                     if (userRole == "IMPORTOR") {
                         tr += `<td>
                               <span class="label label-inverse font-weight-100">
-                              <a class="popup-with-form" href="#exporterForm" onclick="editActivity('` + batchid + `')">
+                              <a class="popup-with-form" href="#exporterForm" onclick="editActivity('` + batchid + `','ImporterModel','`+exporter+`')">
                                 <span class="label label-inverse font-weight-100">Update</span>
                               </a>
                           </td>`;
@@ -623,10 +798,13 @@ img {
                     <td><span class="label label-success font-weight-100">Completed</span> </td>
                   `;
 
+                     var importer =  batch.Importor; 
+                           
+                    
                     if (userRole == "PROCESSOR") {
                         tr += `<td>
                               <span class="label label-inverse font-weight-100">
-                              <a class="popup-with-form" href="#importerForm" onclick="editActivity('` + batchid + `')">
+                              <a class="popup-with-form" href="#importerForm" onclick="editActivity('` + batchid + `','ProcessorModel',    '`+importer+`')">
                                 <span class="label label-inverse font-weight-100">Update</span>
                               </a>
                           </td>`;
@@ -650,20 +828,43 @@ img {
     }
 
     
-function editActivity(batchNo)
+function editActivity(batchNo,modalname,previoushandler)
 {
-  //startLoader();
-  //globCurrentEditingBatchNo = batchNo;
+console.log("previous handler"+previoushandler);
+$("#"+modalname).modal();
 
-   //$("#farmInspectionForm").removeClass("mfp-hide");
-    console.log("editActivity")
-  
+/* farm inspection code here */
+
+$('#updateFarmInspection').click(function() {
+  alert( "farm inspection code here" );
+});
+
+/* hervester code here */
+$('#updateharvestor').click(function() {
+  alert( "Harvester code here" );
+});
+
+/* exporter code here */
+$('#updateexportor').click(function() {
+  alert( "Exporter code here" );
+});
+
+/* importer code here */
+$('#updateimportor').click(function() {
+  alert( "Importer code here" );
+});
+
+/* processor code here */
+$('#updateprocessor').click(function() {
+  alert( "processor code here" );
+
+
+});
+
 }
 
 
-
-
-    function initDateTimePicker() {
+function initDateTimePicker() {
         $('.datepicker-master').datetimepicker({
             format: 'dd-mm-yyyy hh:ii:ss',
             weekStart: 1,
