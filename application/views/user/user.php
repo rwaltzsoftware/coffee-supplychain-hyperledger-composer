@@ -241,7 +241,7 @@ img {
                                     
                                     <div class="form-group">
                                        
-                                        <input type="text" class="form-control" id="currenthandler" name="currenthandler" placeholder="Current Handler" data-parsley-required="true">
+                                        <input type="hidden" class="form-control" id="currenthandler" name="currenthandler" placeholder="Current Handler" data-parsley-required="true">
                                     </div>
 
 
@@ -281,7 +281,7 @@ img {
                                     </div>
 
                                     <div class="modal-body">
-                                        <!-- harvestor Form -->
+                                       
                             <form id="ExporterForm" >
                                 <fieldset style="border:0;">
                                     <!-- <div class="form-group">
@@ -329,7 +329,7 @@ img {
 
                                     <div class="form-group">
                                         <label class="control-label" for="estimateddatetime">Estimated Date Time</label>
-                                    <input type="text" class="form-control" id="estimateddatetime" name="estimateddatetime" placeholder="Estimated Date Time" data-parsley-required="true">
+                                    <input type="text" class="form-control datepicker-master" id="estimateddatetime" name="estimateddatetime" placeholder="Estimated Date Time" data-parsley-required="true">
                                     </div>
                                         
                                         
@@ -384,27 +384,27 @@ img {
                                     </div>
                                     
 
-                                     <div class="form-group">
-                                        <label class="control-label" for="shipname">Ship Name</label>
-                                        <input type="text" class="form-control" id="shipname" name="shipname" placeholder="Ship Name" data-parsley-required="true">
+                                    <div class="form-group">
+                                        <label class="control-label" for="shipname">ship Name</label>
+                                        <input type="text" class="form-control" id="sname" name="transportinfo" placeholder="Ship Name" data-parsley-required="true">
                                     </div>
 
 
                                     <div class="form-group">
-                                        <label class="control-label" for="shipname">Ship No</label>
-                                        <input type="text" class="form-control" id="shipno" name="shipno" placeholder="Ship No" data-parsley-required="true">
+                                        <label class="control-label" for="shipno">Ship No</label>
+                                        <input type="text" class="form-control" id="sno" name="shipno" placeholder="Ship No" data-parsley-required="true">
                                     </div>
 
 
                                     <div class="form-group">
-                                        <label class="control-label" for="shipname">Transporter Info</label>
+                                        <label class="control-label" for="Transporterinfo">Transporter Info</label>
                                         <input type="text" class="form-control" id="transportinfo" name="transportinfo" placeholder="Transporter Info" data-parsley-required="true">
                                     </div>
 
 
                                     <div class="form-group">
                                         <label class="control-label" for="warehousename">Warehouse Name</label>
-                                        <input type="text" class="form-control" id="transportinfo" name="warehousename" placeholder="Warehouse Name" data-parsley-required="true">
+                                        <input type="text" class="form-control" id="warehousename" name="warehousename" placeholder="Warehouse Name" data-parsley-required="true">
                                     </div>
 
                                     <div class="form-group">
@@ -479,9 +479,9 @@ img {
 
                                     <div class="form-group">
                                         <label class="control-label" for="packagingdatetime">Packaging Date Time</label>
-                                        <input type="text" class="form-control" id="packagingdatetime" name="packagingdatetime" placeholder="Packaging Date Time" data-parsley-required="true">
+                                        <input type="text" class="form-control datepicker-master" id="packagingdatetime" name="packagingdatetime" placeholder="Packaging Date Time" data-parsley-required="true">
                                     </div>
-
+ <!--<div><input type='text' class="form-control" id='datetimepicker4' /></div>-->
 
                                     <div class="form-group">
                                         <label class="control-label" for="processorname">Processor Name</label>
@@ -518,7 +518,8 @@ img {
 
     $(document).ready(function() {
 
-        axios({
+    initDateTimePicker();
+            axios({
                 method: 'get',
                 url: 'http://localhost:3000/api/com.coffeesupplychain.system.BatchAsset',
                 responseType: 'json',
@@ -836,22 +837,23 @@ $("#"+modalname).modal();
 /* farm inspection code here */
 
 $('#updateFarmInspection').click(function() {
-  alert( "farm inspection code here" );
+ farmInspectionChanges(batchNo,previoushandler)
 });
 
 /* hervester code here */
 $('#updateharvestor').click(function() {
-  alert( "Harvester code here" );
+  harvestorChanges(batchNo,previoushandler)
 });
 
 /* exporter code here */
 $('#updateexportor').click(function() {
-  alert( "Exporter code here" );
+  exportorChanges(batchNo,previoushandler)
+
 });
 
 /* importer code here */
 $('#updateimportor').click(function() {
-  alert( "Importer code here" );
+  importerChanges(batchNo,previoushandler)
 });
 
 /* processor code here */
@@ -863,10 +865,272 @@ $('#updateprocessor').click(function() {
 
 }
 
+function farmInspectionChanges(batchid,previoushandler){
+if($("#farmInspectionForm").parsley().validate()==true)
+{
+
+var previousHandler = previoushandler;
+var batchId = batchid;
+var typeofseed = $("#typeofseed").val();
+var coffefamily = $("#coffefamily").val();
+var fertilizerUsed = $("#fertilizerUsed").val();
+
+
+var blockchainData = {
+
+
+  "$class": "com.coffeesupplychain.system.BatchFarmInspection",
+  "batch": "resource:com.coffeesupplychain.system.BatchAsset#"+batchId,
+  "previoushandler": previousHandler,
+  "currenthandler": "resource:com.coffeesupplychain.participant.SystemUser#"+userId,
+  "typeofseed": typeofseed,
+  "coffefamily": coffefamily,
+  "fertilizerused": fertilizerUsed,
+  "batchstatus": "FARMINSPECTOR"
+
+}
+console.log(blockchainData)
+
+var blockchainUrl = "http://localhost:3000/api/com.coffeesupplychain.system.BatchFarmInspection";
+
+$(".preloader").show();
+
+        axios({
+                method: 'post',
+                url: blockchainUrl,
+                data: blockchainData,
+                responseType: 'json',
+                timeout: 60000
+             })
+            .then(function(response) {
+
+        if (response.error == undefined) {
+
+            $(".preloader").hide();
+            
+            swal('Success',"batch updated Successfully",'success')
+             .then((value) => {
+               location.reload();
+           });
+ } 
+             else {
+
+                $(".preloader").hide();
+                swal('Error', error.message, 'error');
+               }
+
+        })
+        
+        .catch(function(error) {
+        $(".preloader").hide();
+        swal('Error', error, 'error');
+        });
+
+}
+}
+ 
+
+
+function harvestorChanges(batchid,previoushandler){
+if($("#harvestorForm").parsley().validate()==true)
+{
+var previousHandler = previoushandler;
+var batchId = batchid;
+var coffeevariety = $('#coffeevariety').val();
+var temprature = $('#temprature').val();
+var humidity = $('#humidity').val();
+
+var blockchainData = {
+
+
+  "$class": "com.coffeesupplychain.system.BatchHarvest",
+  "batch": "resource:com.coffeesupplychain.system.BatchAsset#"+batchId,
+  "previoushandler":previousHandler,
+  "currenthandler": "resource:com.coffeesupplychain.participant.SystemUser#"+userId,
+  "coffeevariety": coffeevariety,
+  "temprature": temprature,
+  "humidity": humidity,
+  "batchstatus": "HARVESTOR"
+}
+
+var blockchainUrl = "http://localhost:3000/api/com.coffeesupplychain.system.BatchHarvest";
+
+
+axios({
+                method: 'post',
+                url: blockchainUrl,
+                data: blockchainData,
+                responseType: 'json',
+                timeout: 60000
+             })
+            .then(function(response) {
+
+        if (response.error == undefined) {
+
+            $(".preloader").hide();
+            
+            swal('Success',"batch updated Successfully",'success')
+             .then((value) => {
+               location.reload();
+           });
+ } 
+             else {
+
+                $(".preloader").hide();
+                swal('Error', error.message, 'error');
+               }
+
+        })
+        
+        .catch(function(error) {
+        $(".preloader").hide();
+        swal('Error', error, 'error');
+        });
+
+}
+}
+
+function exportorChanges(batchid,previoushandler){
+    if($('#ExporterForm').parsley().validate()==true)
+{
+
+var previousHandler = previoushandler;
+var batchId = batchid;
+var exportorquantity = $('#exportquantity').val();
+var destaddr = $('#destaddr').val();
+var shipname = $('#shipname').val();
+var shipno = $('#shipno').val();
+var estimateddatetime = $('#estimateddatetime').val();
+
+var blockchainData = {
+
+  "$class": "com.coffeesupplychain.system.BatchExport",
+  "batch": "resource:com.coffeesupplychain.system.BatchAsset#"+batchid,
+  "previoushandler": previousHandler,
+  "currenthandler": "resource:com.coffeesupplychain.participant.SystemUser#"+userId,
+  "exportorquantity": exportorquantity,
+  "destaddr": destaddr,
+  "shipname": shipname,
+  "shipno": shipno,
+  "estimateddatetime":estimateddatetime,
+  "batchstatus": "EXPORTOR"
+
+}
+
+var blockchainUrl = "http://localhost:3000/api/com.coffeesupplychain.system.BatchExport";
+
+axios({
+                method: 'post',
+                url: blockchainUrl,
+                data: blockchainData,
+                responseType: 'json',
+                timeout: 60000
+             })
+            .then(function(response) {
+
+        if (response.error == undefined) {
+
+            $(".preloader").hide();
+            
+            swal('Success',"batch updated Successfully",'success')
+             .then((value) => {
+               location.reload();
+           });
+ } 
+             else {
+
+                $(".preloader").hide();
+                swal('Error', error.message, 'error');
+               }
+
+        })
+        
+        .catch(function(error) {
+        $(".preloader").hide();
+        swal('Error', error, 'error');
+        });
+
+
+
+}
+}
+
+function importerChanges(batchid,previoushandler){
+    if($('#ImporterForm').parsley().validate()==true)
+{
+
+    var previousHandler = previoushandler;
+    var batchId = batchid;  
+    var importquantity = $('#importquantity').val();
+    var shipname = $('#sname').val();
+    var shipno = $('#sno').val();
+    var transportinfo = $('#transportinfo').val();
+    var warehousename = $('#warehousename').val();
+    var warehouseaddr = $('#warehouseaddr').val();
+
+var blockchainData = {
+
+  "$class": "com.coffeesupplychain.system.BatchImport",
+  "batch": "resource:com.coffeesupplychain.system.BatchAsset#"+batchId,
+  "previoushandler": previousHandler,
+  "currenthandler": "resource:com.coffeesupplychain.participant.SystemUser#"+userId,
+  "importorquantity":importquantity,
+  "shipname":shipname,
+  "shipno":shipno,
+  "transportinfo":transportinfo,
+  "warehousename":warehousename,
+  "warehouseaddr":warehouseaddr,
+  "batchstatus":"IMPORTOR"
+}
+
+
+var blockchainUrl = "http://localhost:3000/api/com.coffeesupplychain.system.BatchImport";
+axios({
+                method: 'post',
+                url: blockchainUrl,
+                data: blockchainData,
+                responseType: 'json',
+                timeout: 60000
+             })
+            .then(function(response) {
+
+        if (response.error == undefined) {
+
+            $(".preloader").hide();
+            
+            swal('Success',"batch updated Successfully",'success')
+             .then((value) => {
+               location.reload();
+           });
+ } 
+             else {
+
+                $(".preloader").hide();
+                swal('Error', error.message, 'error');
+               }
+
+        })
+        
+        .catch(function(error) {
+        $(".preloader").hide();
+        swal('Error', error, 'error');
+        });
+
+
+
+
+
+}
+}
+
+
+
+
+
 
 function initDateTimePicker() {
-        $('.datepicker-master').datetimepicker({
-            format: 'dd-mm-yyyy hh:ii:ss',
+        $(".datepicker-master").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii:ss',
             weekStart: 1,
             todayBtn: 1,
             autoclose: 1,
@@ -876,8 +1140,10 @@ function initDateTimePicker() {
             showMeridian: 1,
             minuteStep: 1
         });
-    }
-
+}
+ //$(function () {
+   //             $('#datetimepicker4').datetimepicker();
+     //       });
 
     ipfs = window.IpfsApi('ipfs.infura.io', '5001', {
         protocol: 'https'
