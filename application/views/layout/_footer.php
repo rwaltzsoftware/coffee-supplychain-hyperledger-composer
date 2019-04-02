@@ -44,19 +44,6 @@
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/parsley.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
 
-    <!--  contract abi  -->
-   <!--  <script type="text/javascript" src="<?php echo base_url();?>assets/js/web3.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/abi/CoffeeSupplyChainAbi.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/abi/SupplyChainUserAbi.js"></script> -->
-
-
-    <!-- ipfs  -->
-
-    <!-- <script src="<?php echo base_url();?>assets/https://wzrd.in/standalone/buffer"></script> -->
-    <script src="<?php echo base_url();?>assets/https://unpkg.com/ipfs-api@9.0.0/dist/index.js" integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
-        crossorigin="anonymous"></script>
-<!-- 
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/app/app.js"></script> -->
 
     <?php 
         if(isset($_SERVER['SCRIPT_NAME']) && strpos($_SERVER['SCRIPT_NAME'], "admin.php") !== false)

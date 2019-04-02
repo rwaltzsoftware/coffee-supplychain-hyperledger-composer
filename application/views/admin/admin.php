@@ -91,6 +91,7 @@ img {
                             <th>Exporter</th>
                             <th>Importer</th>
                             <th>Processor</th>
+                            <th>Details</th>
                             
                         </tr>
                     </thead>
@@ -461,11 +462,16 @@ img {
                 } else {
                     var user_array = response.data;
                     var table = '';
-                    Id.userCount = user_array.length;
+                   
                    
                    $('#totalUsers').html(Id.userCount);
 
                     $(user_array).each(function(index, user) {
+
+
+                        if(user.Role!="ADMIN"){
+                        
+                    
                        
 
                         table = `<tr>
@@ -488,11 +494,14 @@ img {
                              </td>
                             </tr>`;
 
-                        if(user.Role!="ADMIN"){
+                    
+                       
                         $('#tblUser').find('tbody').append(table);
-                    }
+                    }                    
                     });
-
+                     
+                     Id.userCount = $('#tblUser >tbody >tr').length;
+                     $('#totalUsers').html(Id.userCount)
                     $('#tblUser').DataTable();
 
                     // $button =`<button type="button" onclick class="fcbtn btn btn-primary btn-outline btn-1f" id="userEditBtn">Edit</button>`;
@@ -801,14 +810,15 @@ function createCultivation() {
        if (batch.Status == "ADMIN") {
             
             tr = `<tr>
-                    <td>`+batchid+`</td>
+                    <td data-val='`+batchid+`'>`+batchid+`</td>
                                     
                     <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><i class="glyphicon glyphicon-eye-open"onclick="view('`+batchid+`')"></i></td>
                     
                 </tr>`;
         } 
@@ -817,11 +827,13 @@ function createCultivation() {
                    <td>`+batchid+`</td>
                     
                     <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-success font-weight-100">Completed</span></td>
                     <td><span class="label label-warning font-weight-100">Processing</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><i class="glyphicon glyphicon-eye-open" onclick="view('`+batchid+`')"></i></td>
+                    
                     
                 </tr>`;
           }
@@ -832,38 +844,17 @@ function createCultivation() {
                    <td>`+batchid+`</td>
                    
                     <td><span class="label label-success font-weight-100">Completed</span></td>
-                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
-                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    
-                </tr>`;
-        } else if (batch.Status == "EXPORTOR") {
-            tr = `<tr>
-                    <td>`+batchid+`</td>
-                    
                     <td><span class="label label-success font-weight-100">Completed</span></td>
-                    <td><span class="label label-success font-weight-100">Completed</span> </td>
-                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
-                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    
-                </tr>`;
-        } else if (batch.Status == "IMPORTOR") {
-            tr = `<tr>
-                   <td>`+batchid+`</td>
-                    
                     <td><span class="label label-success font-weight-100">Completed</span></td>
-                    <td><span class="label label-success font-weight-100">Completed</span> </td>
-                    <td><span class="label label-success font-weight-100">Completed</span> </td>
                     <td><span class="label label-warning font-weight-100">Processing</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
-                    
-                </tr>`;
-        } else if (batch.Status == "PROCESSOR") {
+                     <td><i class="glyphicon glyphicon-eye-open" onclick="view('`+batchid+`')"></i></td>
+
+                    </tr>`;
+        } 
+
+        else if (batch.Status == "EXPORTOR") {
             tr = `<tr>
                     <td>`+batchid+`</td>
                     
@@ -873,11 +864,63 @@ function createCultivation() {
                     <td><span class="label label-success font-weight-100">Completed</span> </td>
                     <td><span class="label label-warning font-weight-100">Processing</span> </td>
                     <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><i class="glyphicon glyphicon-eye-open" onclick="view('`+batchid+`')"></i></td>
+                    </tr>`;
+        } 
+
+        else if (batch.Status == "IMPORTOR") {
+            tr = `<tr>
+                   <td data-val="`+batchid+`">`+batchid+`</td>
+                    
+                    <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
+                    <td><i class="glyphicon glyphicon-eye-open" onclick="view('`+batchid+`')"></i></td>
+                    
+                    </tr>`;
+        } 
+        else if (batch.Status == "PROCESSOR") {
+            tr = `<tr>
+                    <td>`+batchid+`</td>
+                    
+                    <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-warning font-weight-100">Processing</span> </td>
+                    <td><span class="label label-danger font-weight-100">Not Available</span> </td>
+                    <td><i class="glyphicon glyphicon-eye-open" onclick="view('`+batchid+`')"></i></td>
                    </tr>`;
         } 
 
        
+        
+
+            else if (batch.Status == "COMPLETE") {
+            tr = `<tr>
+                    <td>`+batchid+`</td>
+                    
+                    <td><span class="label label-success font-weight-100">Completed</span></td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><span class="label label-success font-weight-100">Completed</span> </td>
+                    <td><i class="glyphicon glyphicon-eye-open" onclick="view('`+batchid+`')"></i></td>
+                    </tr>`;
+        } 
+
+
+
+
+
+
+
         table+=tr;
+      
     
 });
     }
@@ -885,6 +928,21 @@ function createCultivation() {
 
     $('#adminCultivationTable').find('tbody').append(table);
     
+}
+function view(batchid){
+    
+ var url = "http://localhost/coffee_supplychain_app/batchdetails/verifyBatch/"+batchid;
+   console.log(url);
+
+/*
+var array = url.split('/');
+
+var lastsegment = array[array.length-1];
+    
+console.log(lastsegment)
+*/
+window.location.href= url;
+
 }
 
 ipfs = window.IpfsApi('ipfs.infura.io', '5001', {
