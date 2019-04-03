@@ -8,10 +8,24 @@
     .verified_info{
     color: green;
     }
+    .errordiv {
+  width: 80%;
+  height: 100%;  
+  border: 1px solid black;
+  background: white;
+  font-size: 25px;
+  padding: 50px;
+  
+  margin-right:35px;
+  margin-left:130px;
+    }
+
     </style>
     <title></title>
 </head>
+<br>
 <body>
+   
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12">
@@ -28,7 +42,7 @@
                                 <i class="fa fa-check"></i>
                             </div>
                             <div class="timeline-panel" id="cultivationSection">
-                                <div class="timeline-heading">
+                               <div class="timeline-heading">
                                     <h4 class="timeline-title">Cultivation</h4>
                                     <p><small class="text-muted text-success activityDateTime"></small></p><span class="activityQrCode"></span>
                                 </div>
@@ -45,7 +59,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-badge danger">
-                                <i class=""></i>
+                                <i class="fa fa-times"></i>
                             </div>
                             <div class="timeline-panel" id="farmInspectionSection">
                                 <div class="timeline-heading">
@@ -65,7 +79,7 @@
                         </li>
                         <li>
                             <div class="timeline-badge danger">
-                                <i class=""></i>
+                                <i class="fa fa-times"></i>
                             </div>
                             <div class="timeline-panel" id="harvesterSection">
                                 <div class="timeline-heading">
@@ -85,7 +99,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-badge danger">
-                                <i class=""></i>
+                                <i class="fa fa-times"></i>
                             </div>
                             <div class="timeline-panel" id="exporterSection">
                                 <div class="timeline-heading">
@@ -105,7 +119,7 @@
                         </li>
                         <li>
                             <div class="timeline-badge danger">
-                                <i class=""></i>
+                                <i class="fa fa-times"></i>
                             </div>
                             <div class="timeline-panel" id="importerSection">
                                 <div class="timeline-heading">
@@ -125,7 +139,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-badge danger">
-                                <i class=""></i>
+                                <i class="fa fa-times"></i>
                             </div>
                             <div class="timeline-panel" id="processorSection">
                                 <div class="timeline-heading">
@@ -148,25 +162,28 @@
             </div>
         </div><!-- /.row -->
     </div>
+
     <script type="text/javascript">
     var batchId = "<?php echo $this->uri->segment('3'); ?>";
-    console.log(batchId);
+    
     var url = "http://localhost:3000/api/com.coffeesupplychain.system.BatchAsset/"+batchId;
     axios({
     method: 'get',
     url: url,
     responseType: 'json',
     timeout: 60000,
-    }
-       )
+    })
     .then(function(response) {
+   
     if (response.data.length <= 0) {
-      console.log("null responce")
-    }
+    console.log("null responce")
+    } 
+
     else {
-      var Batch_array = response.data;
-      console.log(Batch_array)
-      if(Batch_array.Status=="ADMIN"){
+     var Batch_array = response.data;
+      console.log(Batch_array)}
+       
+     if(Batch_array.Status=="ADMIN"){
         buildCultivatorData(Batch_array);
       }
       else if(Batch_array.Status=="FARMINSPECTOR"){
@@ -187,9 +204,17 @@
       else if(Batch_array.Status=="COMPLETE"){
         buildProcessorData(Batch_array);
       }
-    }
-    }
-         );
+    
+    })
+    .catch(function (error) {
+      $(".preloader").hide();
+     //swal('Error', "something went wrong", 'error');
+var ht ="<div class = errordiv id = errordiv ><center>"+error+"</center></div>";
+     
+     $(".container-fluid").html(ht)
+     
+});
+    
     function buildCultivatorData(batchinfo){
     console.log(batchinfo);
     var tbl = '';
@@ -218,12 +243,14 @@
     
     $('#harvestorTable').parents('li').find("div.timeline-badge").removeClass('danger').addClass('warning');
     
-    $('#inspectionTable').parents('li').find('div > i').removeClass('fa-hourglass-half').addClass('fa fa-check');
-
-    $('#harvestorTable').html("Processing...")
+    $('#inspectionTable').parents('li').find('div > i').removeClass('fa fa-times fa fa-hourglass-half').addClass('fa fa-check');
 
     $('#harvestorTable').parents('li').find('div > i').removeClass('fa fa-check').addClass('fa fa-hourglass-half');
 
+    
+    $('#harvestorTable').html("Processing...")
+
+    
     }
     
 
@@ -239,10 +266,14 @@
    
     $('#exportorTable').html("Processing...")
 
-      $('#harvestorTable').parents('li').find('div > i').removeClass('fa-hourglass-half').addClass('fa fa-check');
+    $('#exportorTable').parents('li').find('div > i').removeClass('fa fa-check').addClass('fa fa-hourglass-half');
+
+
+      $('#harvestorTable').parents('li').find('div > i').removeClass('fa fa-times fa fa-hourglass-half').addClass('fa fa-check');
 
     $('#exportorTable').parents('li').find("div.timeline-badge").removeClass('danger').addClass('warning');
-       $('#exportorTable').parents('li').find('div > i').removeClass('fa fa-check').addClass('fa fa-hourglass-half');
+       
+   
     }
     
 
@@ -258,8 +289,12 @@
     $('#exportorTable').parents('li').find("div.timeline-badge").removeClass('danger warning').addClass('success');
     $('#importorTable').parents('li').find("div.timeline-badge").removeClass('danger').addClass('warning');
      $('#importorTable').html("Processing...")
-     $('#exportorTable').parents('li').find('div > i').removeClass('fa-hourglass-half').addClass('fa fa-check');
-     $('#importorTable').parents('li').find('div > i').removeClass('fa fa-check').addClass('fa fa-hourglass-half');
+     
+ $('#importorTable').parents('li').find('div > i').removeClass('fa fa-check').addClass('fa fa-hourglass-half');
+
+
+     $('#exportorTable').parents('li').find('div > i').removeClass('fa fa-times fa fa-hourglass-half').addClass('fa fa-check');
+     
     }
     
 
@@ -278,8 +313,11 @@
     $('#processorTable').parents('li').find("div.timeline-badge").removeClass('danger').addClass('warning');
     $('#processorTable').html("Processing...")
 
-    $('#importorTable').parents('li').find('div > i').removeClass('fa-hourglass-half').addClass('fa fa-check');
-    $('#processorTable').parents('li').find('div > i').removeClass('fa fa-check').addClass('fa fa-hourglass-half');
+     $('#processorTable').parents('li').find('div > i').removeClass('fa fa-check').addClass('fa fa-hourglass-half');
+
+
+    $('#importorTable').parents('li').find('div > i').removeClass('fa fa-times fa fa-hourglass-half').addClass('fa fa-check');
+    
     }
     
 
@@ -294,7 +332,7 @@
     tbl+= `<tr><td>Packaging Date & Time:`+batchinfo.PackagingDatetime+`</td></tr>"`;
     $('#processorTable').html(tbl);
     $('#processorTable').parents('li').find("div.timeline-badge").removeClass('danger warning').addClass('success');
-    $('#processorTable').parents('li').find('div > i').removeClass('fa-hourglass-half').addClass('fa fa-check');
+    $('#processorTable').parents('li').find('div > i').removeClass('fa fa-times fa fa-hourglass-half').addClass('fa fa-check');
     }
     </script> 
 

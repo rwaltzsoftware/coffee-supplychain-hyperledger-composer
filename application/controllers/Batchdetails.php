@@ -13,7 +13,7 @@
 public function verifyBatch($a){
 	
       		if(isset($a) && isset($a)!="") {
-        $this->load->view('user/batchdetails_view');
+        $this->load->view('batchdetails_view');
       	
       	}
       	else{
