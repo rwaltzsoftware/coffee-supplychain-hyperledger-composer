@@ -104,7 +104,7 @@ img {
 										<h2 class="modal-title" id="userModelTitle">Update Profile</h2>
 									</div>
 
-									<div class="modal-body">
+									<div class="modal-body" style="height: 500px;overflow: auto;">
 										<form id="updateUserForm" onsubmit="return false;">
 											<fieldset style="border:0;">
 												<div class="form-group">
@@ -112,7 +112,7 @@ img {
 													<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Name" data-parsley-required="true">
 												</div> 
 
-											   <ypediv class="form-group">
+											   <div class="form-group">
 													<label class="control-label" for="fullname">Last Name <i class="red">*</i></label>
 													<input type="text" class="form-control" id="Lastname" name="Lastname" placeholder="Name" data-parsley-required="true">
 												</div>    
@@ -142,13 +142,12 @@ img {
 												</div>
 									<div class="form-group" id = updateimagePreview></div>
 											</fieldset>
-								  
-									</div>
-									<div class="modal-footer">
+											<div class="modal-footer">
 										<i style="display: none;" class="fa fa-spinner fa-spin"></i>
 										 <button type="button" class="btn btn-primary" id="userFormBtn" onclick="updateprofile()">Submit</button>
 										</form>
 									</div>
+								 </div>
 								</div>
 							</div>
 						</div>
@@ -498,6 +497,7 @@ img {
 						<!-- /.container-fluid -->
 
 <script type="text/javascript">
+	var rest_server_url = '<?php echo REST_SERVER;?>';
 	var switchery;
 	var Id = {};
 	var userId = <?php $arr = $this->session->userdata('user_data'); echo $arr['id'];?>;
@@ -511,7 +511,7 @@ img {
 	initDateTimePicker();
 			axios({
 				method: 'get',
-				url: 'http://localhost:3000/api/com.coffeesupplychain.system.BatchAsset',
+				url: rest_server_url+'/api/com.coffeesupplychain.system.BatchAsset',
 				responseType: 'json',
 				timeout: 60000,
 			})
@@ -529,7 +529,7 @@ img {
 	
 	axios({
 	method: 'get',
-	url: "http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser/" + userId,
+	url: rest_server_url+"/api/com.coffeesupplychain.participant.SystemUser/" + userId,
 	responseType: 'json',
 	timeout: 60000,
 		})
@@ -615,7 +615,7 @@ img {
 			
 			axios({
 					method: 'put',
-					url: "http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser/" + userId,
+					url: rest_server_url+"/api/com.coffeesupplychain.participant.SystemUser/" + userId,
 					data: blockchainData,
 					responseType: 'json',
 					timeout: 60000,
@@ -898,7 +898,7 @@ var blockchainData = {
 }
 console.log(blockchainData)
 
-var blockchainUrl = "http://localhost:3000/api/com.coffeesupplychain.system.BatchFarmInspection";
+var blockchainUrl = rest_server_url+"/api/com.coffeesupplychain.system.BatchFarmInspection";
 
 $(".preloader").show();
 
@@ -961,7 +961,7 @@ var blockchainData = {
   "batchstatus": "HARVESTOR"
 }
 
-var blockchainUrl = "http://localhost:3000/api/com.coffeesupplychain.system.BatchHarvest";
+var blockchainUrl = rest_server_url+"/api/com.coffeesupplychain.system.BatchHarvest";
 
 $(".preloader").show();
 axios({
@@ -1025,7 +1025,7 @@ var blockchainData = {
 
 }
 
-var blockchainUrl = "http://localhost:3000/api/com.coffeesupplychain.system.BatchExport";
+var blockchainUrl = rest_server_url+"/api/com.coffeesupplychain.system.BatchExport";
 
 $(".preloader").show();
 axios({
@@ -1093,7 +1093,7 @@ var blockchainData = {
 }
 
 
-var blockchainUrl = "http://localhost:3000/api/com.coffeesupplychain.system.BatchImport";
+var blockchainUrl = rest_server_url+"/api/com.coffeesupplychain.system.BatchImport";
 $(".preloader").show();
 axios({
 				method: 'post',
@@ -1163,7 +1163,7 @@ var blockchainData = {
 }
 
 
-var blockchainUrl = "http://localhost:3000/api/com.coffeesupplychain.system.BatchProcessor";
+var blockchainUrl = rest_server_url+"/api/com.coffeesupplychain.system.BatchProcessor";
 
 $(".preloader").show();
 axios({
@@ -1213,7 +1213,8 @@ function initDateTimePicker() {
 			startView: 2,
 			forceParse: 0,
 			showMeridian: 1,
-			minuteStep: 1
+			minuteStep: 1,
+		 pickerPosition: "top-left"
 		});
 }
  //$(function () {

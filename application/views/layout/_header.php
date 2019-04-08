@@ -57,7 +57,7 @@
     <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/axios.min.js"></script>
 
    <script src="https://unpkg.com/ipfs-api@9.0.0/dist/index.js" integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
        crossorigin="anonymous"></script>

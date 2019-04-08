@@ -260,14 +260,14 @@ img {
     </div>
 </div>
 -->
-<div id="userFormModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 170px;">
+<div id="userFormModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 170px; ">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h2 class="modal-title" id="userModelTitle">Add User</h2>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 500px;overflow: auto;">
                 <form id="userForm" onsubmit="return false;">
                     <fieldset style="border:0;">
                         <div class="form-group">
@@ -340,8 +340,9 @@ img {
     </div>
 </div>
 
-<div id="updateFormModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 170px;">
-    <div class="modal-dialog">
+<div id="updateFormModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 160px;
+  ">
+    <div class="modal-dialog" style="height: 500px;overflow: auto;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -419,7 +420,7 @@ img {
 
 
 <script type="text/javascript">
-
+    var rest_server_url = '<?php echo REST_SERVER;?>';
     var Id = {}
     Id.loginid = <?php $arr = $this->session->userdata('user_data'); echo $arr['id'];?>;
     var userId = <?php $arr = $this->session->userdata('user_data'); echo $arr['id'];?>;
@@ -428,7 +429,7 @@ img {
 
         axios({
           method: 'get',
-          url: 'http://localhost:3000/api/com.coffeesupplychain.system.BatchAsset',
+          url: rest_server_url+'/api/com.coffeesupplychain.system.BatchAsset',
           responseType: 'json',
           timeout: 60000,
           })
@@ -452,7 +453,7 @@ img {
 
         axios({
                 method: 'get',
-                url: 'http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser',
+                url: rest_server_url+'/api/com.coffeesupplychain.participant.SystemUser',
                 responseType: 'json',
                 timeout: 60000,
             })
@@ -586,7 +587,7 @@ img {
 
         axios({
                 method: 'put',
-                url: "http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser/" +userId ,
+                url: rest_server_url+"/api/com.coffeesupplychain.participant.SystemUser/" +Id.userid,
                 data: blockchainData,
                 responseType: 'json',
                 timeout: 60000,
@@ -672,7 +673,7 @@ img {
             "ProfileImage": userProfileImage
             }
 
-        var blockchainUrl = 'http://localhost:3000/api/com.coffeesupplychain.participant.SystemUser';
+        var blockchainUrl = rest_server_url+'/api/com.coffeesupplychain.participant.SystemUser';
 
         axios({
                 method: 'post',
@@ -747,7 +748,7 @@ function createCultivation() {
            "batchstatus": "ADMIN"
                            }
 
-     var blockchainUrl = 'http://localhost:3000/api/com.coffeesupplychain.system.BatchCultivation';
+     var blockchainUrl = rest_server_url+'/api/com.coffeesupplychain.system.BatchCultivation';
 
           $(".preloader").show();
     
