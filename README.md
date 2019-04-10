@@ -4,21 +4,22 @@
 
 
   - [Implementation of Coffee Supply chain using Hyperledger](#Implementation of Coffee Supply chain using Hyperledger )
-    -  [Problems in Existing System](#Problems in Existing System)
-    -  [What we are providing?](#What we are providing?)
-    -  [Application Workflow Diagram](#Application Workflow Diagram)
-    -  [In this application we have Six stages](#Six stages In this application)
-    -  [Included Components](#Included Components)
-    -  [Basic Terminologies in Hyperledger Composer](# Basic Terminologies in Hyperledger Composer)
+    -  [Problems in Existing System](#a)
+    -  [What we are providing?](#b)
+    -  [Application Workflow Diagram](#c)
+    -  [In this application we have Six stages](#d)
+    -  [Included Components](#e)
+    -  [Basic Terminologies in Hyperledger Composer](#f)
     -  [Prerequisites](#Prerequisites)
-    -  [Hyperledger Installation](#Hyperledger Installation)
-    -  [Development Screen's](#Development Screen's)
-    -  [Login Page](#Login Page)
-    -  [Admin Dashboard](#Admin Dashboard)
-    -  [Admin Activities](#Admin Activities)
-    -  [User Dashboard](#User Dashboard)
-    -  [User Activities](#User Activities)
-   - [Reference  Links](#Reference  Links)
+    -  [Hyperledger Installation](#g)
+    -  [Development Screen's](#h)
+    -  [Login Page](#i)
+    -  [Admin Dashboard](#j)
+    -  [Admin Activities](#k)
+    -  [User Dashboard](#l)
+    -  [User Activities](#m)
+    - [Reference  Links](#n)
+
 
 
 
@@ -32,19 +33,19 @@ This project showcases the journey of coffee beans on the blockchain.
 
 The coffee supply chain is the sequence of activities and processes to bring raw coffee beans from coffee farms to processed coffee in markets.
 
-### Problems in Existing System
+### Problems in Existing System<a name = a></a>
 - Currently, Coffee trade mostly relies on fax machines and emails to send and receive contracts across the globe, resulting in slower and error-prone paperwork.
 
 - Blockchain can solve this by providing immutable and verifiable data sources
 
-### What we are providing?
+### What we are providing?<a name = b></a>
 - We have implemented a chain code addressing the issue of storing critical data necessary at different stages of the supply chain and making it verifiable by all stakeholders in the supply chain.
 
-### Application Workflow Diagram
+### Application Workflow Diagram<a name = c></a>
 
 ![](https://github.com/imperialsoftech/coffee-supplychain-ethereum/raw/master/screens/workflow.png)
 
-### In this application we have Six stages
+### In this application we have Six stages<a name = d></a>
 1.Admin
 2.Farm-Inspector
 3.Harvester
@@ -64,12 +65,12 @@ The coffee supply chain is the sequence of activities and processes to bring raw
 
 **Processor:** Processors are the organizations who process raw coffee beans by roasting them on a particular temperature and humidity and makes it ready for packaging and to sale into markets. The processor adds the information like quantity, temperature, roasting duration, packaging date time, processor name and processor address.
 
-### Included Components
+### Included Components<a name = e></a>
 - Hyperledger Composer
 - Hyperledger Fabric 
 - Apache and PHP
 
-### Basic Terminologies in Hyperledger Composer
+### Basic Terminologies in Hyperledger Composer<a name = f></a>
  - Hyperledger Fabric is an open source framework for making private (permission) blockchain business networks, where identities and roles of members are known to other members. The network built on fabric serves as the back-end, with a client-side application front-end. SDK’s are available for Nodejs and Java to build client applications, with Python and Golang support coming soon.
 
  - Hyperledger Composer is a set of Javascript based tools and scripts that simplify the creation of Hyperledger Fabric networks. Using these tools, we can generate a business network archive (BNA) for our network.
@@ -80,7 +81,7 @@ The coffee supply chain is the sequence of activities and processes to bring raw
 
 https://hyperledger.github.io/composer/v0.19/installing/installing-prereqs
 
-### Hyperledger Installation
+### Hyperledger Installation<a name = g></a>
 
 **Step 1: Install the CLI tools**
 
@@ -181,15 +182,15 @@ Run
 Explore your Restful Apis created by loopback on http://localhost:3000 
 
 
-### Development Screen's
+### Development Screen's<a name = h></a>
 
-### Login Page
+### Login Page<a name = i></a>
 ![](https://github.com/imperialsoftech/coffee-supplychain-hyperledger-composer/blob/master/screens/home.png)
 
 
 - Log in - You can login to user or admin
 
-### Admin Dashboard
+### Admin Dashboard<a name = j></a>
 
 ![](https://github.com/imperialsoftech/coffee-supplychain-hyperledger-composer/blob/master/screens/admindashbord.png?raw=true)
 - Total Number of Users
@@ -204,7 +205,7 @@ Explore your Restful Apis created by loopback on http://localhost:3000
 - Below these, on the left side, you can find out all the roles available in the coffee supply chain and their slugs, on the right side you will find out all users list and their details.
 - Using Create User button you can add a new user into the coffee supply chain.
 
-### Admin Activities
+### Admin Activities<a name = k></a>
 **Create user**
 
 ![](https://github.com/imperialsoftech/coffee-supplychain-hyperledger-composer/blob/master/screens/adduser.png?raw=true)
@@ -240,9 +241,9 @@ Explore your Restful Apis created by loopback on http://localhost:3000
 
 
 
-### User Dashboard
+### User Dashboard<a name = l></a>
 ![](https://github.com/imperialsoftech/coffee-supplychain-hyperledger-composer/blob/master/screens/userdashbord.png?raw=true)
-### User Activities
+### User Activities<a name = m></a>
 
 **Update User Profile**
 ![](https://github.com/imperialsoftech/coffee-supplychain-hyperledger-composer/blob/master/screens/updateuser.png?raw=true)
@@ -287,7 +288,7 @@ Explore your Restful Apis created by loopback on http://localhost:3000
 - Processing has to fill the information of quantity, temperature, time for roasting, packaging date.
 - And this is how the Coffee Supply Chain completes for one batch.
 
-### Reference  Links
+### Reference  Links<a name = n></a>
 
 https://hyperledger.github.io/composer/v0.19/reference/glossary
 
@@ -296,6 +297,5 @@ https://medium.freecodecamp.org/how-to-build-a-blockchain-network-using-hyperled
 https://hyperledger.github.io/composer/v0.19/installing/development-tools
 
 https://medium.com/coinmonks/ibm-blockchain-demystified-3af55ab7c7bb
-
 
 
