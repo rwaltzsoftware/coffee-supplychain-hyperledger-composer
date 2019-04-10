@@ -133,11 +133,14 @@ It will typically open your browser automatically, at the following address: htt
 
 **1.Instantiating your Business Blockchain with Composer**
 > mkdir project folder name
- cd project folder name
+cd project folder name
 
-**2 .Instantiate a Business network & Deploying the .bna file on the Hyperledger Fabric Blockchain**
-> yo hyperledger-composer
-? Please select the type of project: Business Network
+open the project folder in terminal and follow the steps
+
+---
+````
+ yo hyperledger-composer
+ ? Please select the type of project: Business Network
 You can run this generator using: 'yo hyperledger-composer:businessnetwork'
 Welcome to the business network generator
 ? Business network name: coffee_supply_chain
@@ -147,7 +150,7 @@ Welcome to the business network generator
 ? License: Apache-2.0
 ? Namespace: test
 ? Do you want to generate an empty template network? Yes: generate an empty template network
-
+````
 2) copy Model.cto into (models/test.cto)
 
 3) create lib folder in test-bank and in lib folder create logic.js file and paste the JS code here
