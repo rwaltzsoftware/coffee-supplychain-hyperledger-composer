@@ -4,21 +4,21 @@
 
 
   - [Implementation of Coffee Supply chain using Hyperledger](#Implementation of Coffee Supply chain using Hyperledger )
-    + [Problems in Existing System](#Problems in Existing System)
-    + [What we are providing?](#What we are providing?)
-    + [Application Workflow Diagram](#Application Workflow Diagram)
-    + [In this application we have Six stages](#Six stages In this application)
-    + [Included Components](#Included Components)
-    + [Basic Terminologies in Hyperledger Composer](# Basic Terminologies in Hyperledger Composer)
-    + [Prerequisites](#Prerequisites)
-    + [Hyperledger Installation](#Hyperledger Installation)
-    + [Development Screen's](#Development Screen's)
-    + [Login Page](#Login Page)
-    + [Admin Dashboard](#Admin Dashboard)
-    + [Admin Activities](#Admin Activities)
-    + [User Dashboard](#User Dashboard)
-    + [User Activities](#User Activities)
-     [Reference  Links](#Reference  Links)
+    -  [Problems in Existing System](#Problems in Existing System)
+    -  [What we are providing?](#What we are providing?)
+    -  [Application Workflow Diagram](#Application Workflow Diagram)
+    -  [In this application we have Six stages](#Six stages In this application)
+    -  [Included Components](#Included Components)
+    -  [Basic Terminologies in Hyperledger Composer](# Basic Terminologies in Hyperledger Composer)
+    -  [Prerequisites](#Prerequisites)
+    -  [Hyperledger Installation](#Hyperledger Installation)
+    -  [Development Screen's](#Development Screen's)
+    -  [Login Page](#Login Page)
+    -  [Admin Dashboard](#Admin Dashboard)
+    -  [Admin Activities](#Admin Activities)
+    -  [User Dashboard](#User Dashboard)
+    -  [User Activities](#User Activities)
+   - [Reference  Links](#Reference  Links)
 
 
 
@@ -186,7 +186,6 @@ Explore your Restful Apis created by loopback on http://localhost:3000
 ### Login Page
 ![](https://github.com/imperialsoftech/coffee-supplychain-hyperledger-composer/blob/master/screens/home.png)
 
-![](https://github.com/imperialsoftech/coffee-supplychain-hyperledger-composer/blob/master/screens/home.png?raw=true)
 
 - Log in - You can login to user or admin
 
