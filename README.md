@@ -155,6 +155,7 @@ Welcome to the business network generator
 2) copy Model.cto into (models/test.cto)
 
 3) create lib folder in test-bank and in lib folder create logic.js file and paste the JS code here
+(Note: you can get cto and js file ref in folder 'chaincode ref )
 
 4) Generate the Business Network Archive (BNA)
 Run 

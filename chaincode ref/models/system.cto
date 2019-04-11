@@ -1,0 +1,137 @@
+/**
+ * New model file
+ */
+
+namespace com.coffeesupplychain.system
+
+import com.coffeesupplychain.participant.SystemUser
+
+enum BatchStatus{
+  o ADMIN
+  o FARMINSPECTOR
+  o HARVESTOR
+  o EXPORTOR
+  o IMPORTOR
+  o PROCESSOR
+}
+
+asset BatchAsset identified by BatchId {
+  o String BatchId 
+  o BatchStatus Status default = 'ADMIN'
+  o DateTime CreatedDateTime optional
+  o String CoffeeFamily optional
+  o String TypeofSeed optional
+  o String FertilizerUsed optional
+  o String CoffeeVariety optional
+  o String Temprature optional
+  o String Humidity optional
+  o String DestAddr optional
+  o String ShipName optional
+  o String ShipNo optional
+  o DateTime EstimatedDatetime optional
+  o String ExporterId optional
+  o String TransportInfo optional
+  o String WarehouseName optional
+  o String WarehouseAddr optional
+  o String ImporterId optional
+  o String RoastingTemp optional 
+  o DateTime PackagingDatetime optional
+  o String TimeForRoasting optional
+  o String ProcessorName optional
+  o String ProcessorAddr optional
+  o String ExportorQuantity optional
+  o String ImportorQuantity optional
+  o String ProcessedQuantity optional
+  o DateTime CultivatorIntime optional
+  o DateTime FarmInspectorIntime optional
+  o DateTime HarvesterIntime optional
+  o DateTime ExporterIntime optional
+  o DateTime ImporterIntime optional
+  o DateTime ProcessorIntime optional
+  --> SystemUser Cultivator optional
+  --> SystemUser FarmInspector optional
+  --> SystemUser Harvestor optional
+  --> SystemUser Exportor optional
+  --> SystemUser Importor optional
+  --> SystemUser Processor optional
+}
+
+transaction BatchCultivation{
+ --> SystemUser cultivator 
+   o String batchid optional
+   o BatchStatus batchstatus
+  o DateTime cultivatorintime optional
+}
+
+  
+transaction BatchFarmInspection{
+  --> BatchAsset batch
+  --> SystemUser previoushandler
+  --> SystemUser currenthandler
+  o String typeofseed 
+  o String coffefamily
+  o String fertilizerused
+  o BatchStatus batchstatus
+  o DateTime farminspectorintime optional
+}
+  
+  
+transaction BatchHarvest{
+  --> BatchAsset batch
+  --> SystemUser previoushandler
+  --> SystemUser currenthandler
+  o String coffeevariety 
+  o String temprature
+  o String humidity 
+  o BatchStatus batchstatus
+  o DateTime harvesterintime optional
+}
+  
+transaction BatchExport{
+  --> BatchAsset batch
+  --> SystemUser previoushandler
+  --> SystemUser currenthandler
+  o String exportorquantity
+  o String destaddr
+  o String shipname 
+  o String shipno
+  o DateTime estimateddatetime
+  o BatchStatus batchstatus
+  o DateTime exporterintime optional
+}
+
+transaction BatchImport{
+  --> BatchAsset batch
+  --> SystemUser previoushandler
+  --> SystemUser currenthandler
+  o String importorquantity
+  o String shipname
+  o String shipno
+  o String transportinfo 
+  o String warehousename
+  o String warehouseaddr
+  o BatchStatus batchstatus
+  o DateTime importerintime optional
+}
+
+transaction BatchProcessor {
+  --> BatchAsset batch
+  --> SystemUser previoushandler
+  --> SystemUser currenthandler
+  o String processedquantity
+  o String roastingtemp
+  o String timeforroasting
+  o DateTime packagingdatetime
+  o String processorname 
+  o String processoraddress
+  o BatchStatus batchstatus
+  o DateTime processorintime optional
+}
+
+event BatchProcess{
+--> SystemUser previoushandler
+--> SystemUser currenthandler
+    o String batchstatus
+  	o DateTime createddatetime
+}
+  
